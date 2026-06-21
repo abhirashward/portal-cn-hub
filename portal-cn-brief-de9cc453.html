@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>咪咕体育 · 一站式体育资讯与服务</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f9fc;
+      color: #1d2b3a;
+      line-height: 1.7;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 简洁博客式网格卡片 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    @media (min-width: 520px) {
+      .grid-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 45, 60, 0.05), 0 1px 3px rgba(0, 60, 80, 0.06);
+      border: 1px solid rgba(0, 150, 136, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(0, 100, 100, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+      color: #0a3d3b;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3::before {
+      content: "▍";
+      color: #0ea5a0;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: #2c3f4e;
+      margin: 0.3rem 0;
+    }
+
+    /* 引用提示块 */
+    .quote-tip {
+      background: #e3f2ef;
+      border-left: 5px solid #0ea5a0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 16px 16px 0;
+      margin: 2rem 0;
+      font-style: normal;
+    }
+
+    .quote-tip p {
+      font-size: 1rem;
+      color: #0b3e3c;
+      margin-bottom: 0.4rem;
+    }
+
+    .quote-tip .source {
+      font-size: 0.9rem;
+      color: #2d6b67;
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+
+    /* hero 区 */
+    .hero {
+      padding: 0.5rem 0 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #083b3a;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero .subhead {
+      font-size: 1.1rem;
+      color: #356a66;
+      border-bottom: 2px solid rgba(14, 165, 160, 0.3);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .intro {
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1.02rem;
+      color: #1e3643;
+      background: rgba(14, 165, 160, 0.04);
+      padding: 0.5rem 0.8rem;
+      border-radius: 40px;
+    }
+
+    /* 段落排版 */
+    .content-section {
+      margin: 2rem 0 1.5rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #0f4946;
+      margin: 2rem 0 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .content-section p {
+      margin: 1rem 0;
+      font-size: 1.02rem;
+      color: #1b3140;
+    }
+
+    .content-section p a {
+      color: #0a7a74;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      font-weight: 500;
+      transition: color 0.2s, background 0.2s;
+      padding: 0 0.1rem;
+    }
+
+    .content-section p a:hover {
+      color: #064540;
+      background: #d4ece8;
+      border-radius: 6px;
+    }
+
+    .faq-summary {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 1.8rem 1.5rem;
+      margin: 2.2rem 0 1.2rem;
+      border: 1px solid rgba(0, 130, 120, 0.2);
+    }
+
+    .faq-summary h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #094c48;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed #c3dad6;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      color: #0a5a55;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .faq-item span {
+      color: #284b4a;
+      font-size: 0.96rem;
+    }
+
+    .access-line {
+      margin: 2.5rem 0 1rem;
+      background: #dcefec;
+      padding: 1.2rem 1.5rem;
+      border-radius: 60px;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #054542;
+      font-weight: 450;
+      box-shadow: inset 0 1px 4px rgba(14, 165, 160, 0.08);
+    }
+
+    .access-line a {
+      color: #0b5f5a;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+      text-decoration-color: #0ea5a0;
+    }
+
+    .access-line a:hover {
+      color: #03322e;
+      background: #b2dfd9;
+      border-radius: 30px;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+      color: #5d7a7a;
+      border-top: 1px solid rgba(0, 128, 128, 0.2);
+      text-align: center;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 460px) {
+      body { padding: 1rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .card { padding: 1.3rem; }
+      .quote-tip { padding: 1rem; }
+      .access-line { font-size: 0.96rem; padding: 1rem 0.8rem; }
+    }
+
+    /* 点缀细节 */
+    .accent-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #0ea5a0;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .visually-hidden {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <!-- hero 简洁博客风格 -->
+  <header class="hero">
+    <h1>咪咕体育 · 一目了然的体育服务</h1>
+    <div class="subhead">从赛事资讯到内容聚合</div>
+    <p class="intro">一个帮助用户快速定位体育内容与服务的轻量门户。无论你关注热门赛事、体育社区还是数据动态，都能在这里找到清晰的路径。</p>
+  </header>
+
+  <!-- 网格卡片：特点/场景 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>集中式体育信息</h3>
+      <p>避免在多个应用间切换。咪咕体育将赛事预告、实时比分、回看索引等整合在统一界面下，简化查找过程。</p>
+    </div>
+    <div class="card">
+      <h3>场景化内容分类</h3>
+      <p>按用户兴趣与场景划分：直播聚合、专题策划、运动科普、俱乐部动态。每个人都能快速找到与自己相关的板块。</p>
+    </div>
+    <div class="card">
+      <h3>轻量访问体验</h3>
+      <p>页面结构清晰，加载流畅。无论是手机端还是桌面端，都能在几秒内定位到想要的内容区域，减少无效浏览。</p>
+    </div>
+    <div class="card">
+      <h3>持续更新的资源库</h3>
+      <p>体育赛事日历、深度文章、视频集锦……内容保持更新，覆盖大众体育与细分领域，满足不同阶段的阅读需求。</p>
+    </div>
+  </div>
+
+  <!-- 正文段落：从用途识别出发 -->
+  <div class="content-section">
+    <h2>当你第一次打开这个网站</h2>
+    <p>许多用户面对一个新体育平台时，最先问的是：“这里能做什么？是看直播，查数据，还是读新闻？” 咪咕体育的首页布局正是为了回答这个问题——通过清晰的功能入口与内容预览，让你快速判断它是否符合自己的需要。</p>
+    <p>例如，顶部导航直接对应核心服务：赛事直播、回放、资讯、专题。页面中部则展示当下热门赛事卡片与精选内容摘要，帮助你在不点击任何链接的情况下，了解近期重点。这种设计思路降低了学习成本，尤其适合临时想找某场比赛或某篇分析的用户。</p>
+    <p>如果你经常关注国内联赛、国际大赛或者健身科普，不妨花一分钟浏览这个门户。它的信息组织方式比较直白，没有过多干扰。想进一步了解具体内容，可以直接访问 <a href="https://portal-cn-migu.com">咪咕体育</a> 的首页，根据你的兴趣深入探索。</p>
+  </div>
+
+  <!-- 引用提示 -->
+  <div class="quote-tip">
+    <p>“一个好的体育门户，应该让用户在三步之内找到他关心的内容，而不是用广告和弹窗消耗耐心。”</p>
+    <div class="source">—— 摘自平台设计笔记 · 信息架构原则</div>
+  </div>
+
+  <!-- 再一段正文 + 场景描述 -->
+  <div class="content-section">
+    <h2>日常使用场景举例</h2>
+    <p>周末晚上想查一下明天凌晨的足球赛是否在平台直播，打开首页后，顶部的“赛程”板块直接列出近三天的焦点赛事，附带直播状态与时间。不需要注册，也不需要搜索。</p>
+    <p>另一个场景：想找关于某项运动的深度分析文章。首页内容流里包含了“专题推荐”模块，点进去可以看到编辑精选的长文与数据报告。虽然文章数量不算海量，但每篇都经过筛选，对普通爱好者来说已经足够。</p>
+    <p>如果你只是偶尔看看体育资讯，不想下载额外应用，那么这个网页端门户可以成为你的一个轻量选择。通过 <a href="https://portal-cn-migu.com">咪咕体育</a> 的页面结构，你还能发现更多细分内容，比如运动装备评测或赛事文化讨论。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <h3>常见疑问速览</h3>
+    <div class="faq-item">
+      <strong>这个网站适合哪些人？</strong>
+      <span>对体育赛事、资讯有基本需求的普通观众，以及希望在一个地方了解多种体育内容的轻度爱好者。</span>
+    </div>
+    <div class="faq-item">
+      <strong>内容更新频率如何？</strong>
+      <span>赛事信息与新闻保持日常更新，专题内容按赛季或热点事件周期更新。具体以页面实际显示为准。</span>
+    </div>
+    <div class="faq-item">
+      <strong>需要付费或注册才能浏览？</strong>
+      <span>大部分内容可直接浏览，部分直播或高清回放可能需登录或符合平台政策。首页本身无需额外操作即可访问。</span>
+    </div>
+  </div>
+
+  <!-- 访问句 —— 自然嵌入，无硬广色彩 -->
+  <div class="access-line">
+    如果你的目的是快速了解一个体育门户的用途与内容构成，可以从 <a href="https://portal-cn-migu.com">咪咕体育</a> 的首页出发，根据自己的兴趣判断是否匹配。
+  </div>
+
+  <footer class="footer-note">
+    <span class="accent-dot"></span> 简洁博客式介绍 · 基于真实页面结构描述 · 无夸大表述
+  </footer>
+</div>
+</body>
+</html>
